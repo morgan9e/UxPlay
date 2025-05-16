@@ -155,6 +155,7 @@ void audio_renderer_init(logger_t *render_logger, const char* audiosink, const b
             break;
         }
         g_string_append (launch, "audioconvert ! ");
+        g_string_append (launch, "tee name=t ! queue ! flacenc ! filesink location=output.flac sync=false t. ! queue ! ");
         g_string_append (launch, "audioresample ! ");    /* wasapisink must resample from 44.1 kHz to 48 kHz */
         g_string_append (launch, "volume name=volume ! level ! ");
         g_string_append (launch, audiosink);
